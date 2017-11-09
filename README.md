@@ -6,7 +6,7 @@
 
 ## How to run?
 + Step.1
-Change the flag of center loss
+Change the flag of center loss inside TYY_mnist.py
 ```
 isCenterloss = True
 #isCenterloss = False
