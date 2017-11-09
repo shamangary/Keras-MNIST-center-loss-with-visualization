@@ -18,7 +18,7 @@ KERAS_BACKEND=tensorflow python TYY_mnist.py
 ```
 
 
-References:
+## References:
 + https://github.com/keunwoochoi/keras_callbacks_example
 + https://github.com/jxgu1016/MNIST_center_loss_pytorch
 + http://kexue.fm/archives/4493/
