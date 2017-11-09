@@ -1,5 +1,9 @@
 # Keras-MNIST-center-loss-with-visualization
 
+
+<img src="https://github.com/shamangary/Keras-MNIST-center-loss-with-visualization/blob/master/images/softmax_only/epoch%3D29.jpg" height="300"/> <img src="https://github.com/shamangary/Keras-MNIST-center-loss-with-visualization/blob/master/images/centerloss/epoch%3D29.jpg" height="300"/>
+
+
 ## How to run?
 + Step.1
 Change the flag of center loss
