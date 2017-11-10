@@ -5,6 +5,10 @@
 
 <center> Fig. (left) Softmax only. (right) Softmax with center loss </center> 
 
+## Update (2017/11/10)
++ Remove the one-hot inputs for Embedding layer and replace it by single value labels.
++ Every classes are visually seperated now :)
+
 ## How to run?
 + Step.1
 Change the flag of center loss inside TYY_mnist.py
