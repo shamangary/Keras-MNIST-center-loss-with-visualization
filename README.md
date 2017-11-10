@@ -18,8 +18,19 @@ Run the file
 KERAS_BACKEND=tensorflow python TYY_mnist.py
 ```
 
+## Dependencies
++ Anaconda
++ Keras
++ Tensorflow
++ Others: (install with anaconda)
+```
+conda install -c anaconda scikit-learn 
+conda install -c conda-forge matplotlib
+```
+
 
 ## References:
++ https://github.com/fchollet/keras/blob/master/examples/mnist_cnn.py
 + https://github.com/keunwoochoi/keras_callbacks_example
 + https://github.com/jxgu1016/MNIST_center_loss_pytorch
 + http://kexue.fm/archives/4493/
