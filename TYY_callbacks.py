@@ -31,10 +31,12 @@ class Histories(keras.callbacks.Callback):
 		ip1_input = self.model.input #this can be a list or a matrix. 
 		if self.isCenterloss:
 			ip1_input = self.model.input[0]
+			labels = self.validation_data[1].flatten() # already are single value ground truth labels
+		else:
+			labels = np.argmax(self.validation_data[1],axis=1) #make one-hot vector to index for visualization
+		
 		ip1_layer_model = Model(inputs=ip1_input, outputs=self.model.get_layer('ip1').output)
 		ip1_output = ip1_layer_model.predict(self.validation_data[0])
-		#labels = np.argmax(self.validation_data[1],axis=1) #make one-hot vector to index for visualization
-		labels = self.validation_data[1].flatten() # already are single value ground truth labels
 		
 		visualize(ip1_output,labels,epoch)
 		

@@ -14,10 +14,10 @@ from keras.optimizers import SGD, Adam
 
 batch_size = 128
 num_classes = 10
-epochs = 30
+epochs = 50
 
-isCenterloss = True
-#isCenterloss = False
+#isCenterloss = True
+isCenterloss = False
 
 
 
@@ -54,9 +54,9 @@ y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
 inputs = Input(shape=(28,28,1))
-x = Conv2D(32, (5,5))(inputs)
+x = Conv2D(32, (3,3))(inputs)
 x = PReLU()(x)
-x = Conv2D(32, (5,5))(x)
+x = Conv2D(32, (3,3))(x)
 x = PReLU()(x)
 x = Conv2D(64, (3,3))(x)
 x = PReLU()(x)
