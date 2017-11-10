@@ -33,9 +33,9 @@ class Histories(keras.callbacks.Callback):
 			ip1_input = self.model.input[0]
 		ip1_layer_model = Model(inputs=ip1_input, outputs=self.model.get_layer('ip1').output)
 		ip1_output = ip1_layer_model.predict(self.validation_data[0])
-		labels = np.argmax(self.validation_data[1],axis=1) #make one-hot vector to index for visualization
+		#labels = np.argmax(self.validation_data[1],axis=1) #make one-hot vector to index for visualization
+		labels = self.validation_data[1].flatten() # already are single value ground truth labels
 		
-
 		visualize(ip1_output,labels,epoch)
 		
 		return
@@ -60,6 +60,7 @@ def visualize(feat, labels, epoch):
     XMin = np.min(feat[:,1])
     YMax = np.max(feat[:,0])
     YMin = np.min(feat[:,1])
+
     plt.xlim(xmin=XMin,xmax=XMax)
     plt.ylim(ymin=YMin,ymax=YMax)
     plt.text(XMin,YMax,"epoch=%d" % epoch)

@@ -44,6 +44,11 @@ print('x_train shape:', x_train.shape)
 print(x_train.shape[0], 'train samples')
 print(x_test.shape[0], 'test samples')
 
+# Maintain single value ground truth labels for center loss inputs
+# Because Embedding layer only accept index as inputs instead of one-hot vector
+y_train_value = y_train
+y_test_value = y_test
+
 # convert class vectors to binary class matrices
 y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
@@ -72,12 +77,14 @@ model.compile(loss="categorical_crossentropy",
               optimizer=SGD(lr=0.05),
               metrics=['accuracy'])
 
+
 if isCenterloss:
-  input_target = Input(shape=(10,))
+  lambda_c = 0.2
+  input_target = Input(shape=(1,)) # single value ground truth labels as inputs
   centers = Embedding(10,2)(input_target)
   l2_loss = Lambda(lambda x: K.sum(K.square(x[0]-x[1][:,0]),1,keepdims=True),name='l2_loss')([ip1,centers])
   model_centerloss = Model(inputs=[inputs,input_target],outputs=[ip2,l2_loss])        
-  model_centerloss.compile(optimizer=SGD(lr=0.05), loss=["categorical_crossentropy", lambda y_true,y_pred: y_pred],loss_weights=[1,0.2],metrics=['accuracy'])
+  model_centerloss.compile(optimizer=SGD(lr=0.05), loss=["categorical_crossentropy", lambda y_true,y_pred: y_pred],loss_weights=[1,lambda_c],metrics=['accuracy'])
 
 
 # prepare callback
@@ -88,7 +95,7 @@ if isCenterloss:
   random_y_train = np.random.rand(x_train.shape[0],1)
   random_y_test = np.random.rand(x_test.shape[0],1)
   
-  model_centerloss.fit([x_train,y_train], [y_train, random_y_train], batch_size=batch_size, epochs=epochs, verbose=1, validation_data=([x_test,y_test], [y_test,random_y_test]), callbacks=[histories])
+  model_centerloss.fit([x_train,y_train_value], [y_train, random_y_train], batch_size=batch_size, epochs=epochs, verbose=1, validation_data=([x_test,y_test_value], [y_test,random_y_test]), callbacks=[histories])
 
 else:
   model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(x_test,y_test), callbacks=[histories])
