@@ -7,6 +7,7 @@
 
 ## Update (2017/11/10)
 + Remove the one-hot inputs for Embedding layer and replace it by single value labels.
++ There are two kinds labels: single value for center loss, and one-hot vector labels for softmax term.
 + Every classes are visually seperated now :)
 
 ## How to run?
